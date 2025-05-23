@@ -1,19 +1,29 @@
 package SandwichShop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sandwich {
     private String size;
     private String breadType;
     private boolean isToasted;
-    List<String> regularToppings;
-    List<String> premiumToppings;
-    List<String> sauces;
+    private double price;
+    ArrayList<Toppings> toppings;
 
-    public Sandwich(String size, String breadType, boolean isToasted) {
+    public Sandwich(String size, String breadType, boolean isToasted, double price) {
         this.size = size;
         this.breadType = breadType;
         this.isToasted = isToasted;
+        this.price = price;
+        this.toppings = new ArrayList<>();
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getSize() {
@@ -40,40 +50,13 @@ public class Sandwich {
         isToasted = toasted;
     }
 
-    public List<String> getRegularToppings() {
-        return regularToppings;
-    }
-
-    public void setRegularToppings(List<String> regularToppings) {
-        this.regularToppings = regularToppings;
-    }
-
-    public List<String> getPremiumToppings() {
-        return premiumToppings;
-    }
-
-    public void setPremiumToppings(List<String> premiumToppings) {
-        this.premiumToppings = premiumToppings;
-    }
-
-    public List<String> getSauces() {
-        return sauces;
-    }
-
-    public void setSauces(List<String> sauces) {
-        this.sauces = sauces;
-    }
-
 
     @Override
     public String toString() {
-        return "Sandwich{" +
+        return "Sandwich" +
                 "Size: " + size + '\'' +
                 "BreadType: " + breadType + '\'' +
-                "Toasted: " + isToasted +
-                "Regular Toppings: " + regularToppings +
-                "Premium Toppings: " + premiumToppings +
-                "Sauces: " + sauces;
+                "Toasted: " + isToasted;
     }
 
     double getBasePrice(){
