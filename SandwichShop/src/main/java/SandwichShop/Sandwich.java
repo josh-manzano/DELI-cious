@@ -1,7 +1,6 @@
 package SandwichShop;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Sandwich {
     private String size;

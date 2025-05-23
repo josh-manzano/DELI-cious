@@ -8,20 +8,23 @@ public class Main {
         Order newOrder = new Order();
         boolean mainRunning = true;
 
-        System.out.println("Welcome to                  \n" +
-                "|  _ \\       (_)          (_)                \n" +
-                "| | | |/ _ \\ | |_____ / __| |/ _ \\| | | / __|\n" +
-                "| |_| |  __/ | |_____| (__| | (_) | |_| \\__ \\\n" +
-                "|____/ \\___|_|_|      \\___|_|\\___/ \\__,_|___/");
-
         System.out.println("""
-                \n1)Create Order
-                2)Exit
-                """);
+                Welcome to\s
+                |  _ \\     | |(_)          (_)               \s
+                | | | |/ _ \\ | |_____ / __| |/ _ \\| | | / __|
+                | |_| |  __/ | |_____| (__| | (_) | |_| \\__ \\
+                |____/ \\___|_|_|      \\___|_|\\___/ \\__,_|___/""");
+
+
 
 
         while(mainRunning){
-            String choice = in.nextLine();
+            System.out.println("\n*Home*");
+            System.out.println("""
+                \n1)Create Order
+                2)Exit
+                """);
+            String choice = in.nextLine().trim();
             switch (choice){
                 case "1" -> newOrder.orderMenu();
 
