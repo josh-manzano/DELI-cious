@@ -9,11 +9,10 @@ public class Sandwich {
     private double price;
     ArrayList<Toppings> toppings;
 
-    public Sandwich(String size, String breadType, boolean isToasted, double price) {
+    public Sandwich(String size, String breadType, boolean isToasted) {
         this.size = size;
         this.breadType = breadType;
         this.isToasted = isToasted;
-        this.price = price;
         this.toppings = new ArrayList<>();
     }
 
@@ -59,7 +58,6 @@ public class Sandwich {
     }
 
     double getBasePrice(){
-
         return 0;
     }
 
@@ -69,11 +67,6 @@ public class Sandwich {
     }
 
     double getToppingPrice(){
-
-        return 0;
-    }
-
-    double calculatePrice(){
 
         return 0;
     }
