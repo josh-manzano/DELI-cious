@@ -1,10 +1,9 @@
 package SandwichShop;
 
-public class Chips {
-    private double price;
+public class Chips extends MenuItem {
 
-    public double getPrice() {
-        return 1.50;
+    @Override
+    double calculatePrice() {
+        return 1.5;
     }
-
 }

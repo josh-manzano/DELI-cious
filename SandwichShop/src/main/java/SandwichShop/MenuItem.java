@@ -1,6 +1,6 @@
 package SandwichShop;
 
 public abstract class MenuItem {
-    void calculatePrice(){
-    }
+
+    abstract double calculatePrice();
 }

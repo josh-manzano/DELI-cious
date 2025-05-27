@@ -1,8 +1,11 @@
 package SandwichShop;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Order {
+
+    List<MenuItem> cart;
 
     Scanner in = new Scanner(System.in);
     void orderMenu(){

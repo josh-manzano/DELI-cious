@@ -1,30 +1,33 @@
 package SandwichShop;
 
-public class Drink {
-    private int size;
-    private double price;
+public class Drink extends MenuItem{
+    private String size;
     private String flavor;
 
-    public Drink(int size, double price, String flavor) {
+    public Drink(String size, String flavor) {
         this.size = size;
-        this.price = price;
         this.flavor = flavor;
     }
 
-    public int getSize() {
+    @Override
+    double calculatePrice() {
+        if(size.trim().equalsIgnoreCase("Small")){
+            return  2.00;
+        }else if (size.trim().equalsIgnoreCase("Medium")){
+            return 2.50;
+        } else if (size.trim().equalsIgnoreCase("Large")) {
+            return 3.00;
+        }else{
+            return 0.00;
+        }
+    }
+
+    public String getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(String size) {
         this.size = size;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getFlavor() {
@@ -35,4 +38,8 @@ public class Drink {
         this.flavor = flavor;
     }
 
+    @Override
+    public String toString() {
+        return size + " - " + flavor;
+    }
 }

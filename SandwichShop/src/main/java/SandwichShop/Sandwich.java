@@ -3,13 +3,13 @@ package SandwichShop;
 import java.util.ArrayList;
 
 public class Sandwich {
-    private String size;
+    private int size;
     private String breadType;
     private boolean isToasted;
     private double price;
     ArrayList<Toppings> toppings;
 
-    public Sandwich(String size, String breadType, boolean isToasted) {
+    public Sandwich(int size, String breadType, boolean isToasted) {
         this.size = size;
         this.breadType = breadType;
         this.isToasted = isToasted;
@@ -24,11 +24,11 @@ public class Sandwich {
         this.price = price;
     }
 
-    public String getSize() {
+    public int getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(int size) {
         this.size = size;
     }
 
