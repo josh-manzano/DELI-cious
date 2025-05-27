@@ -44,18 +44,22 @@ public class Order {
     }
 
     void addSandwich(){
-        System.out.println("What size would you like?");
-        String size = in.nextLine();
+        boolean addingSandwich =true;
+        System.out.println();
         System.out.println("What bread would you like?");
-        String breadType = in.nextLine();
-        System.out.println("What meat would you like?");
-        String meat = in.nextLine();
-        System.out.println("What cheese would you like?");
-        String cheese = in.nextLine();
-        System.out.println("Would you like another topping?");
-        String choice = in.nextLine();
-        System.out.println("Would you like it toasted?");
-        String toasted = in.nextLine();
+        System.out.println("""
+                1) White
+                2) Wheat
+                3) Rye
+                4) Wrap
+                """);
+        while (addingSandwich){
+            String breadType = in.nextLine().trim().toLowerCase();
+
+
+        }
+
+
 
 
     }

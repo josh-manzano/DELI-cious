@@ -1,13 +1,13 @@
 package SandwichShop;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Sandwich {
+public class Sandwich extends MenuItem{
     private int size;
     private String breadType;
     private boolean isToasted;
-    private double price;
-    ArrayList<Toppings> toppings;
+    List<Topping> toppings;
 
     public Sandwich(int size, String breadType, boolean isToasted) {
         this.size = size;
@@ -16,12 +16,29 @@ public class Sandwich {
         this.toppings = new ArrayList<>();
     }
 
-    public double getPrice() {
-        return price;
-    }
+    @Override
+    double calculatePrice() {
+        double basePrice = 0.0;
+        if(size == 4) {
+            basePrice = 5.50;
+        }else if (size == 8){
+            basePrice = 7.00;
+        } else if (size == 12) {
+            basePrice = 8.50;
+        }
+        for (Topping topping : toppings){
+            if(size == 4){
+                basePrice += 1.00;
+            } else if (size == 8) {
+                basePrice += 2.00;
+            } else if (size == 12) {
+                basePrice += 3.00;
+            }
+        }
 
-    public void setPrice(double price) {
-        this.price = price;
+
+
+        return basePrice;
     }
 
     public int getSize() {
@@ -52,23 +69,10 @@ public class Sandwich {
     @Override
     public String toString() {
         return "Sandwich" +
-                "Size: " + size + '\'' +
-                "BreadType: " + breadType + '\'' +
-                "Toasted: " + isToasted;
+                size + '"' +
+                breadType+
+                isToasted;
     }
 
-    double getBasePrice(){
-        return 0;
-    }
-
-    double getBreadPrice(){
-
-        return 0;
-    }
-
-    double getToppingPrice(){
-
-        return 0;
-    }
 
 }

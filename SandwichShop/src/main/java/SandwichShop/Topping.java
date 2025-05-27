@@ -1,26 +1,14 @@
 package SandwichShop;
 
-public class Toppings {
-    private double price;
+public class Topping {
     private String name;
-    private int size;
-    private boolean extra;
     private boolean premium;
+    private boolean extra;
 
-    public Toppings(double price, String name, int size, boolean extra, boolean premium) {
-        this.price = price;
+    public Topping(String name, boolean premium, boolean extra) {
         this.name = name;
-        this.size = size;
-        this.extra = extra;
         this.premium = premium;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+        this.extra = extra;
     }
 
     public String getName() {
@@ -29,14 +17,6 @@ public class Toppings {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public boolean isExtra() {
@@ -54,6 +34,4 @@ public class Toppings {
     public void setPremium(boolean premium) {
         this.premium = premium;
     }
-
-
 }
