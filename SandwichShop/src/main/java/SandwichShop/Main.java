@@ -16,8 +16,6 @@ public class Main {
                 |____/ \\___|_|_|      \\___|_|\\___/ \\__,_|___/""");
 
 
-
-
         while(mainRunning){
             System.out.println("\n*Home*");
             System.out.println("""
@@ -25,13 +23,13 @@ public class Main {
                 2)Exit
                 """);
             String choice = in.nextLine().trim();
+
             switch (choice){
                 case "1" -> newOrder.orderMenu();
 
                 case "2" -> mainRunning = false;
 
-                default ->
-                System.out.println("Try again");
+                default -> System.out.println("Try again");
 
             }
         }

@@ -4,11 +4,6 @@ public class Drink extends MenuItem{
     private String size;
     private String flavor;
 
-    public Drink(String size, String flavor) {
-        this.size = size;
-        this.flavor = flavor;
-    }
-
     @Override
     double calculatePrice() {
         if(size.trim().equalsIgnoreCase("Small")){
