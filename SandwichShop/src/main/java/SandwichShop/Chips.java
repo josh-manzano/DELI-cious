@@ -11,6 +11,10 @@ public class Chips extends MenuItem implements Printable {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public double getPrice(){
         return 1.5 * quantity;
     }
