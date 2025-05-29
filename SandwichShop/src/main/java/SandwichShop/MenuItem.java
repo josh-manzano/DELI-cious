@@ -1,6 +1,6 @@
 package SandwichShop;
 
-public abstract class MenuItem {
-
+public abstract class MenuItem implements Printable {
     abstract double calculatePrice();
+
 }

@@ -168,20 +168,30 @@ public class Order {
                 while(!validIn){
                     System.out.println("Would you like extra meat? Y/N");
                     String extraYorN = in.nextLine().trim().toLowerCase();
-                    boolean isExtra = false;
                     switch (extraYorN) {
                         case "y" -> {
-                            isExtra = true;
+                            System.out.println("Choose your extra meat:");
+                            for (int i = 0; i < AllToppings.meats.size(); i++) {
+                                System.out.println((i + 1) + ") " + AllToppings.meats.get(i));
+                            }
+                            int extraMeatChoice = in.nextInt();
+                            in.nextLine();
+                            if (extraMeatChoice >= 1 && extraMeatChoice <= AllToppings.meats.size()) {
+                                String extraMeatName = AllToppings.meats.get(extraMeatChoice - 1);
+                                Topping extraTopping = new Topping(extraMeatName, true, true);
+                                sandwich.addTopping(extraTopping);
+                            }else{
+                                System.out.println("Invalid, try again");
+                            }
                             validIn = true;
                         }
                         case "n" -> {
-                            isExtra = false;
                             validIn = true;
                         }
                         default -> System.out.println("Invalid, try again");
                     }
-                    Topping topping = new Topping(meatName, true, isExtra);
-                    sandwich.addTopping(topping);
+                    Topping meatTopping = new Topping(meatName, true, false);
+                    sandwich.addTopping(meatTopping);
                     choosingCheese = true;
                     choosingMeat = false;
                 }
@@ -209,19 +219,29 @@ public class Order {
                 while(!validIn){
                     System.out.println("Would you like extra cheese? Y/N");
                     String extraYorN = in.nextLine().trim().toLowerCase();
-                    boolean isExtra = false;
                     switch (extraYorN) {
                         case "y" -> {
-                            isExtra = true;
+                            System.out.println("Choose your extra cheese:");
+                            for (int i = 0; i < AllToppings.cheese.size(); i++) {
+                                System.out.println((i + 1) + ") " + AllToppings.cheese.get(i));
+                            }
+                            int extraCheeseChoice = in.nextInt();
+                            in.nextLine();
+                            if(extraCheeseChoice >= 1 && extraCheeseChoice <= AllToppings.meats.size()){
+                                String extraCheeseName = AllToppings.meats.get(extraCheeseChoice - 1);
+                                Topping extraTopping = new Topping(extraCheeseName, true, true);
+                                sandwich.addTopping(extraTopping);
+                            }else{
+                                System.out.println("Invalid, try again");
+                            }
                             validIn = true;
                         }
                         case "n" -> {
-                            isExtra = false;
                             validIn = true;
                         }
                         default -> System.out.println("Invalid, try again");
                     }
-                    Topping topping = new Topping(cheeseName, true, isExtra);
+                    Topping topping = new Topping(cheeseName, true, false);
                     sandwich.addTopping(topping);
                     choosingToppings = true;
                     choosingCheese = false;
@@ -309,7 +329,7 @@ public class Order {
     }
 
     void addDrink() {
-        Drink drink = new Drink();
+        String size = "";
         System.out.println("What size would you like?");
         System.out.println("""
                 1) Small
@@ -321,56 +341,121 @@ public class Order {
 
         switch (sizeChoice) {
             case "1" -> {
-                drink.setSize("Small");
+                size = "Small";
                 choosingSize = false;
             }
             case "2" -> {
-                drink.setSize("Medium");
+                size = "Medium";
                 choosingSize = false;
             }
             case "3" -> {
-                drink.setSize("Large");
+                size = "Large";
                 choosingSize = false;
             }
-            case "0" -> System.out.println("Cancelled Drink");
+            case "0" -> {
+                System.out.println("Cancelled Drink");
+                return;
+            }
 
             default -> System.out.println("Invalid, try again");
         }
 
-        System.out.println("What flavor would you like?");
-        System.out.println("""
+        boolean choosingFlavor = true;
+        while (choosingFlavor){
+            System.out.println("What flavor would you like?");
+            System.out.println("""
                 1) Sprite
                 2) Coke
                 3) Pink Lemonade
                 4) Water
                 0) Cancel
                 """);
-        String flavorChoice = in.nextLine().trim();
-        switch (flavorChoice){
-            case"1" -> drink.setFlavor("Sprite");
-            case"2" -> drink.setFlavor("Coke");
-            case"3" -> drink.setFlavor("Pink Lemonade");
-            case"4" -> drink.setFlavor("Water");
-            case"0" -> {
-                System.out.println("Drink Cancelled");
+            String flavorChoice = in.nextLine().trim();
+            switch (flavorChoice){
+                case"1" -> {
+                    Drink drink = new Drink(size, "Sprite");
+                    cart.add(drink);
+                    choosingFlavor = false;
+                }
+                case"2" -> {
+                    Drink drink = new Drink(size, "Coke");
+                    cart.add(drink);
+                    choosingFlavor = false;
+                }
+                case"3" -> {
+                    Drink drink = new Drink(size, "Pink Lemonade");
+                    cart.add(drink);
+                    choosingFlavor = false;
+                }
+                case"4" -> {
+                    Drink drink = new Drink(size, "Water");
+                    cart.add(drink);
+                    choosingFlavor = false;
+                }
+                case"0" -> {
+                    System.out.println("Drink Cancelled");
+                }
+                default -> System.out.println("Invalid, try again");
             }
-            default -> System.out.println("Invalid, try again");
         }
-        cart.add(drink);
+
 
     }
 
     void addChip(){
-        System.out.println("Chips have been added to cart.");
+        boolean chipFound = false;
+
+        for(MenuItem item : cart){
+            if (item instanceof Chips){
+            Chips chips = (Chips) item;
+            chips.increaseQuantity();
+            chipFound = true;
+            break;
+            }
+        }
+        if(!chipFound){
+            Chips newChip = new Chips();
+            cart.add(newChip);
+        }
+        System.out.println("Chips has been added");
     }
 
     void checkout(){
+        if(cart.isEmpty()){
+            System.out.println("Cart is empty. Nothing to checkout");
+            return;
+        }
+
+        System.out.print("\n======= DELI-cious =======\n");
+        double total = 0;
+
         for(MenuItem items : cart){
-            System.out.println("Item: " + items);
+            if(items instanceof Printable printable){
+                System.out.println(printable.printReceipt());
+                total += items.calculatePrice();
+            }
+
+        }
+
+        System.out.println("==================================");
+        System.out.printf("Total: "+ String.format("$%.2f", total));
+        System.out.println("\n==================================");
+
+        System.out.println("1) Place Order \n2) Cancel Order");
+        String checkoutChoice = in.nextLine().trim();
+        if(checkoutChoice.equals("1")){
+            System.out.println("Thank you, Come again.");
+            cart.clear();
+        } else if (checkoutChoice.equals("2")) {
+            System.out.println("Order has been cancelled");
+            cart.clear();
+        }else {
+            System.out.println("Invalid, try again");
         }
 
 
     }
+
 
 
 

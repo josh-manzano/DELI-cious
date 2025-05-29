@@ -3,7 +3,7 @@ package SandwichShop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sandwich extends MenuItem{
+public class Sandwich extends MenuItem implements Printable {
     private int size;
     private String breadType;
     private boolean toasted;
@@ -31,21 +31,12 @@ public class Sandwich extends MenuItem{
         }
 
         for (Topping topping : toppings){
-            if (topping.isPremium()){
                 String name = topping.getName();
                 boolean isMeat = AllToppings.meats.contains(name);
                 boolean isCheese = AllToppings.cheese.contains(name);
 
-                if (isMeat){
-                    if(topping.isExtra()){
-                        if(size == 4){
-                            basePrice += 0.50;
-                        } else if (size == 8) {
-                            basePrice += 1.00;
-                        } else if (size == 12) {
-                            basePrice += 1.50;
-                        }
-                    }else{
+                if (isMeat && topping.isPremium()){
+                    if(!topping.isExtra()){
                         if (size == 4){
                             basePrice += 1.00;
                         } else if (size ==8) {
@@ -54,13 +45,19 @@ public class Sandwich extends MenuItem{
                             basePrice += 3.00;
                         }
                     }
-
-
+                    if(topping.isExtra()){
+                        if(size == 4){
+                            basePrice += 0.50;
+                        } else if (size == 8) {
+                            basePrice += 1.00;
+                        } else if (size == 12) {
+                            basePrice += 1.50;
+                        }
+                    }
 
                 }
-
-                if (isCheese){
-                    if (topping.isExtra()){
+                if (isCheese && topping.isPremium()){
+                    if (!topping.isExtra()){
                         if (size == 4){
                             basePrice += 0.30;
                         } else if (size == 8) {
@@ -68,7 +65,9 @@ public class Sandwich extends MenuItem{
                         } else if (size == 12) {
                             basePrice += 0.90;
                         }
-                    }else{
+                    }
+
+                    if (topping.isExtra()){
                         if (size == 4){
                             basePrice += 0.75;
                         } else if (size == 8) {
@@ -78,7 +77,6 @@ public class Sandwich extends MenuItem{
                         }
                     }
                 }
-            }
         }
 
         return basePrice;
@@ -104,13 +102,27 @@ public class Sandwich extends MenuItem{
         this.toasted = toasted;
     }
 
+
+    @Override
+    public String printReceipt() {
+        StringBuilder receipt = new StringBuilder();
+        receipt.append(String.format("%-33s $%.2f", "Sandwich", calculatePrice()));
+        receipt.append("\nBread: ").append(breadType).append("\n");
+        receipt.append(" Size: ").append(size).append(" in\n");
+
+        for(Topping topping : toppings){
+            receipt.append("  + ").append(topping.toString()).append("\n");
+        }
+        return receipt.toString();
+    }
+
     @Override
     public String toString() {
-        return "Sandwich: "  +
-                size +
-                "breadType: " + breadType +
-                "isToasted: " + toasted +
-                "toppings: " + toppings ;
+        return "\nSize: "  +
+                size + "\"" +
+                " Bread Type: " + breadType +
+                " Toasted: " + toasted +
+                " Toppings: " + toppings ;
     }
 
     public String getSide() {
