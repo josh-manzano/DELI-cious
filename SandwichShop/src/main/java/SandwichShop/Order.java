@@ -1,5 +1,6 @@
 package SandwichShop;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ public class Order {
     List<MenuItem> cart = new ArrayList<>();
 
 
-    void orderMenu(){
+    void orderMenu() throws IOException {
 
 
         boolean orderMenuRunning = true;
@@ -420,13 +421,13 @@ public class Order {
         System.out.println("Chips has been added");
     }
 
-    void checkout(){
+    void checkout() throws IOException {
         if(cart.isEmpty()){
             System.out.println("Cart is empty. Nothing to checkout");
             return;
         }
 
-        System.out.print("\n======= DELI-cious =======\n");
+        System.out.print("\n============ DELI-cious ============\n");
         double total = 0;
 
         for(MenuItem items : cart){
@@ -445,6 +446,7 @@ public class Order {
         String checkoutChoice = in.nextLine().trim();
         if(checkoutChoice.equals("1")){
             System.out.println("Thank you, Come again.");
+            ReceiptWriter.writeToFile(cart, total);
             cart.clear();
         } else if (checkoutChoice.equals("2")) {
             System.out.println("Order has been cancelled");

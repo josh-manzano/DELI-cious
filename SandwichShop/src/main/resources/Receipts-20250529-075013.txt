@@ -1,0 +1,25 @@
+============== Deli-cious ==============
+
+Sandwich                          $10.60
+Bread: Rye
+ Size: 8 in
+  + Salami
+  + Ham
+  + Swiss
+  + Tomatoes
+  + cucumbers
+  + ranch
+
+Sandwich                          $12.40
+Bread: Wrap
+ Size: 12 in
+  + Steak
+  + American
+  + jalapenos
+
+Medium - Pink Lemonade            $2.50
+Chips                     x1      $1.50
+
+============================Total: $27.00
+
+============================
